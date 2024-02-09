@@ -116,7 +116,7 @@ const LoginPage = () => {
             </Link>
             <span>
               <span>Don't have an account?</span>
-              <Link href="#" underline="hover">
+              <Link href="/signup" underline="hover">
                 {"Sign up?"}
               </Link>
             </span>

@@ -126,7 +126,7 @@ const SignupPage = () => {
           </Button>
           <span>
             Already have an account?
-            <Link href="#" underline="hover">
+            <Link href="/" underline="hover">
               {"Login"}
             </Link>
           </span>
