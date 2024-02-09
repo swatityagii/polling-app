@@ -2,10 +2,11 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate,
 } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
+import AddPoll from "./AddPoll";
+import ListPolls from "./ListPolls";
 
 const App = () => {
   return (
@@ -13,6 +14,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/addpoll" element={<AddPoll/>}/>
+        <Route path="/listpolls" element={<ListPolls/>}/>
       </Routes>
     </Router>
   );

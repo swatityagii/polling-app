@@ -1,16 +1,14 @@
 import { useDispatch } from "react-redux";
-import { loginUser } from "../redux/cardSlice";
+import { loginUser } from "./redux/cardSlice";
 import {
   TextField,
   Stack,
   Typography,
   Container,
   Button,
-  Link,
-  //   FormControlLabel,
-  //   Checkbox,
   IconButton,
 } from "@mui/material";
+import { Link} from "react-router-dom";
 
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
@@ -21,6 +19,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
 
   const [loginCredentials, setLoginCredentials] = useState({
+
     username: "",
     password: "",
   });
@@ -116,8 +115,8 @@ const LoginPage = () => {
             </Link>
             <span>
               <span>Don't have an account?</span>
-              <Link href="/signup" underline="hover">
-                {"Sign up?"}
+              <Link to="/signup" underline="hover">
+                {"Sign up"}
               </Link>
             </span>
           </Container>

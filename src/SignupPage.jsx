@@ -1,16 +1,16 @@
 import { useDispatch } from "react-redux";
-import { signupUser } from "../redux/cardSlice";
+import { signupUser } from "./redux/cardSlice";
 import {
   TextField,
   Stack,
   Typography,
   Container,
   Button,
-  Link,
   Select,
   MenuItem,
   InputLabel,
 } from "@mui/material";
+import { Link} from "react-router-dom";
 import { useState } from "react";
 
 const SignupPage = () => {
@@ -126,7 +126,7 @@ const SignupPage = () => {
           </Button>
           <span>
             Already have an account?
-            <Link href="/" underline="hover">
+            <Link to="/">
               {"Login"}
             </Link>
           </span>
