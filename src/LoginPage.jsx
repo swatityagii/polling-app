@@ -9,19 +9,13 @@ import {
   IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-
-const validationSchema = Yup.object().shape({
-  username: Yup.string().required("Username or Email is required"),
-  password: Yup.string().required("Password is required"),
-});
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
@@ -31,7 +25,15 @@ const LoginPage = () => {
   });
 
   const handleLogin = () => {
-    dispatch(loginUser(loginCredentials));
+    dispatch(loginUser(loginCredentials))
+      .then((response) => {
+        if (response.payload.authenticated) {
+          navigate("/listpolls");
+        }
+      })
+      .catch((error) => {
+        console.error("Login failed:", error);
+      });
   };
 
   const handleTogglePassword = () => {

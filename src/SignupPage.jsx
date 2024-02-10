@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { signupUser } from "./redux/cardSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import {
   TextField,
   Stack,
@@ -10,27 +12,24 @@ import {
   MenuItem,
   InputLabel,
 } from "@mui/material";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-
-
-
-// const initialValues= {
-//     username: "",
-//     role: "guest",
-//     password: "",
-//     confirmPassword: "",
-// }
+import { useSelector } from "react-redux";
+import { resetError } from "./redux/authReducer";
 
 const SignupPage = () => {
-  //   const Formik= useFormik({
-  //   initialValues: initialValues,
-  //   onSubmit: (values)=> {
-  //     console.log(values);
-  //   }
-  // })
-  // console.log(Formik);
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+  const signupAuthenticated = useSelector(
+    (state) => state.card.signupAuthenticated
+  );
+
+  console.log(signupAuthenticated);
+
+  const users = useSelector((state) => state.card.users);
+
+  console.log(users);
 
   const [signupData, setSignupData] = useState({
     username: "",
@@ -42,6 +41,18 @@ const SignupPage = () => {
   const handleSignup = () => {
     dispatch(signupUser(signupData));
   };
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetError());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (signupAuthenticated) {
+      navigate("/");
+    }
+  }, [signupAuthenticated]);
 
   return (
     <Container
@@ -130,9 +141,7 @@ const SignupPage = () => {
           </Button>
           <span>
             Already have an account?
-            <Link to="/">
-              {"Login"}
-            </Link>
+            <Link to="/">{"Login"}</Link>
           </span>
         </Stack>
       </Container>
