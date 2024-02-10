@@ -9,13 +9,13 @@ export const fetchUsers = createAsyncThunk("fetchUsers", async () => {
 });
 
 export const loginUser = createAsyncThunk("loginUser", async (credentials) => {
-  console.log(credentials);
+  // console.log(credentials);
   const response = await axios.get(`${BASE_URL}login`, { params: credentials });
   return response.data;
 });
 
 export const signupUser = createAsyncThunk("signupUser", async (userData) => {
-  console.log(userData);
+  // console.log(userData);
   const signupData = {
     username: userData.username,
     password: userData.password,

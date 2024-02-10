@@ -13,13 +13,28 @@ import {
 import { Link} from "react-router-dom";
 import { useState } from "react";
 
+
+
+// const initialValues= {
+//     username: "",
+//     role: "guest",
+//     password: "",
+//     confirmPassword: "",
+// }
+
 const SignupPage = () => {
+  //   const Formik= useFormik({
+  //   initialValues: initialValues,
+  //   onSubmit: (values)=> {
+  //     console.log(values);
+  //   }
+  // })
+  // console.log(Formik);
   const dispatch = useDispatch();
 
   const [signupData, setSignupData] = useState({
     username: "",
-    role: "",
-    email: "",
+    role: "guest",
     password: "",
     confirmPassword: "",
   });
@@ -72,21 +87,10 @@ const SignupPage = () => {
             variant="outlined"
             margin="normal"
           >
+            <MenuItem value="guest">Guest</MenuItem>
             <MenuItem value="admin">Admin</MenuItem>
             <MenuItem value="user">User</MenuItem>
           </Select>
-
-          <TextField
-            id="outlined-basic"
-            label="Email"
-            variant="outlined"
-            margin="normal"
-            placeholder="Enter your Email..."
-            value={signupData.email}
-            onChange={(e) =>
-              setSignupData({ ...signupData, email: e.target.value })
-            }
-          />
 
           <TextField
             id="outlined-basic"
