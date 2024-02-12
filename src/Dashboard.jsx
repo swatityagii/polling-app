@@ -8,7 +8,7 @@ const ListPolls = () => {
     <>
       <AppBar>
         <Typography variant="h5" align="center" sx={{ mt: 1 }}>
-          ADMIN POLL
+          DASHBOARD
         </Typography>
         <Toolbar
           sx={{
@@ -26,10 +26,15 @@ const ListPolls = () => {
           >
             New Poll
           </Button>
-          <Button color="inherit" sx={{
+          <Button
+            color="inherit"
+            sx={{
               borderRadius: "10px",
               border: "1px solid #fff",
-            }}>LogOut</Button>
+            }}
+          >
+            LogOut
+          </Button>
         </Toolbar>
       </AppBar>
       <Container
@@ -49,24 +54,50 @@ const ListPolls = () => {
             border: "2px solid #fff",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             mt: 2,
-            pb: 3
+            pb: 3,
           }}
         >
-          <Typography align="start" sx={{ml:2, mt:2, mb:2}}>hjgh</Typography>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Typography align="start" sx={{ ml: 2, mt: 2, mb: 2 }}>
+            hjgh
+          </Typography>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
           </Stack>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
           </Stack>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
@@ -79,31 +110,55 @@ const ListPolls = () => {
             border: "2px solid #fff",
             boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
             mt: 2,
-            pb: 3
+            pb: 3,
           }}
         >
-          <Typography align="start" sx={{ml:2, mt:2, mb:2}}>hjgh</Typography>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Typography align="start" sx={{ ml: 2, mt: 2, mb: 2 }}>
+            hjgh
+          </Typography>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
           </Stack>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
           </Stack>
-          <Stack sx={{ display: "flex", flexDirection: "row", bgcolor: "Highlight",
-            color: "#fff",borderRadius: "10px", mb:2 }}>
+          <Stack
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              bgcolor: "Highlight",
+              color: "#fff",
+              borderRadius: "10px",
+              mb: 2,
+            }}
+          >
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
             <Toolbar>jhgj</Toolbar>
           </Stack>
         </Container>
-        
-        
       </Container>
     </>
   );

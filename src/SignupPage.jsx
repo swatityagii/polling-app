@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { signupUser } from "./redux/cardSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import {Formik, Form} from "formik";
 import {
   TextField,
   Stack,
@@ -100,7 +101,6 @@ const SignupPage = () => {
           >
             <MenuItem value="guest">Guest</MenuItem>
             <MenuItem value="admin">Admin</MenuItem>
-            <MenuItem value="user">User</MenuItem>
           </Select>
 
           <TextField

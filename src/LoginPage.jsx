@@ -1,5 +1,8 @@
 import { useDispatch } from "react-redux";
 import { loginUser } from "./redux/cardSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { LoginresetError } from "./redux/authReducer";
 import {
   TextField,
   Stack,
@@ -25,16 +28,26 @@ const LoginPage = () => {
   });
 
   const handleLogin = () => {
-    dispatch(loginUser(loginCredentials))
-      .then((response) => {
-        if (response.payload.authenticated) {
-          navigate("/listpolls");
-        }
-      })
-      .catch((error) => {
-        console.error("Login failed:", error);
-      });
+    dispatch(loginUser(loginCredentials));
   };
+
+  const loginAuthenticated = useSelector(
+    (state) => state.card.loginAuthenticated
+  );
+
+  console.log(loginAuthenticated);
+
+  useEffect(() => {
+    return () => {
+      dispatch(LoginresetError());
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (loginAuthenticated) {
+      navigate("/dashboard");
+    }
+  }, [loginAuthenticated]);
 
   const handleTogglePassword = () => {
     setShowPassword((prevShowPassword) => !prevShowPassword);
