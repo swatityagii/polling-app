@@ -38,7 +38,7 @@ function MyField(props) {
         },
       }}
       InputLabelProps={{
-        style: { color: "Black" },
+        style: { color: "grey" },
       }}
       label={label}
     />
@@ -50,15 +50,15 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
-  const [loginCredentials, setLoginCredentials] = useState({
+  const logindetails = {
     username: "",
     password: "",
-  });
-
-  const handleLogin = () => {
-    dispatch(loginUser(loginCredentials));
   };
 
+  const handleSubmit = async (values) => {
+    console.log(values);
+    dispatch(loginUser(values));
+  };
   const loginAuthenticated = useSelector(
     (state) => state.card.loginAuthenticated
   );
@@ -97,9 +97,9 @@ const LoginPage = () => {
       >
         <Typography variant="h4">Login Form</Typography>
         <Formik
-          initialValues={loginCredentials}
+          initialValues={logindetails}
           validationSchema={validationSchema}
-          onSubmit={handleLogin}
+          onSubmit={handleSubmit}
         >
           {({ errors, touched }) => (
             <Form>
@@ -112,18 +112,9 @@ const LoginPage = () => {
                   variant="outlined"
                   margin="normal"
                   placeholder="Enter Username or Email..."
-                  value={loginCredentials.username}
-                  onChange={(e) =>
-                    setLoginCredentials({
-                      ...loginCredentials,
-                      username: e.target.value,
-                    })
-                  }
                 />
 
-                {errors.username &&
-                touched.username &&
-                loginCredentials.username === "" ? (
+                {errors.username && touched.username ? (
                   <div style={{ color: "red" }}>{errors.username}</div>
                 ) : null}
 
@@ -136,18 +127,9 @@ const LoginPage = () => {
                   margin="normal"
                   placeholder="Enter your password..."
                   type={showPassword ? "text" : "password"}
-                  value={loginCredentials.password}
-                  onChange={(e) =>
-                    setLoginCredentials({
-                      ...loginCredentials,
-                      password: e.target.value,
-                    })
-                  }
                 />
 
-                {errors.password &&
-                touched.password &&
-                loginCredentials.password === "" ? (
+                {errors.password && touched.password ? (
                   <div style={{ color: "red" }}>{errors.password}</div>
                 ) : null}
 
@@ -169,13 +151,10 @@ const LoginPage = () => {
                   </Typography>
                 </Stack>
 
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleLogin}
-                >
+                <Button variant="contained" color="primary" type="submit">
                   Login
                 </Button>
+
                 <Container
                   sx={{
                     display: "flex",

@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useState } from "react";
 import {
   Stack,
   Typography,
@@ -13,9 +16,10 @@ import {
   MenuItem,
   InputLabel,
   TextField,
+  IconButton,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 import { useSelector } from "react-redux";
 import { resetError } from "./redux/authReducer";
 
@@ -32,7 +36,7 @@ function MyField(props) {
         },
       }}
       InputLabelProps={{
-        style: { color: "Black" },
+        style: { color: "grey" },
       }}
       label={label}
     />
@@ -40,8 +44,8 @@ function MyField(props) {
 }
 
 const SignupPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const signupAuthenticated = useSelector(
     (state) => state.card.signupAuthenticated
@@ -53,26 +57,30 @@ const SignupPage = () => {
 
   console.log(users);
 
-  const [signupData, setSignupData] = useState({
+  const signupValues = {
     username: "",
-    role: "guest",
     password: "",
     confirmPassword: "",
-  });
+    role: "guest",
+  };
+
+  const handleSignup = async (values) => {
+    dispatch(signupUser(values));
+  };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
+    username: Yup.string().required("*Username is required"),
     password: Yup.string()
-      .min(8, "Password must be at least 8 characters")
-      .required("Password is required"),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
-      .required("Confirm Password is required"),
-  });
 
-  const handleSignup = () => {
-    dispatch(signupUser(signupData));
-  };
+      .matches(/[a-z]/, "*Password must include at least one lowercase letter")
+      .matches(/[A-Z]/, "*Password must include at least one uppercase letter")
+      .matches(/\d/, "*Password must include at least one digit")
+      .min(8, "*Password must contain at least 8 characters")
+      .required("*Password is required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "*Passwords must match")
+      .required("*Confirm Password is required"),
+  });
 
   useEffect(() => {
     return () => {
@@ -85,6 +93,10 @@ const SignupPage = () => {
       navigate("/");
     }
   }, [signupAuthenticated]);
+
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   return (
     <Container
@@ -103,7 +115,7 @@ const SignupPage = () => {
         <Typography variant="h4">Sign Up Form</Typography>
 
         <Formik
-          initialValues={signupData}
+          initialValues={signupValues}
           validationSchema={validationSchema}
           onSubmit={handleSignup}
         >
@@ -118,21 +130,15 @@ const SignupPage = () => {
                   variant="outlined"
                   margin="normal"
                   placeholder="Enter your name..."
-                  value={signupData.username}
-                  onChange={(e) =>
-                    setSignupData({ ...signupData, username: e.target.value })
-                  }
                 />
 
-                {errors.username &&
-                touched.username &&
-                signupData.username === "" ? (
+                {errors.username && touched.username ? (
                   <div style={{ color: "red" }}>{errors.username}</div>
                 ) : null}
 
                 <InputLabel
                   htmlFor="role"
-                  sx={{ mt: 2, textAlign: "left", ml: 1 }}
+                  sx={{ mt: 1, textAlign: "left", ml: 1 }}
                 >
                   Role
                 </InputLabel>
@@ -140,12 +146,10 @@ const SignupPage = () => {
                 <Select
                   sx={{ textAlign: "left" }}
                   id="role"
-                  value={signupData.role}
-                  onChange={(e) =>
-                    setSignupData({ ...signupData, role: e.target.value })
-                  }
                   variant="outlined"
+                  name="role"
                   margin="normal"
+                  defaultValue="guest"
                 >
                   <MenuItem value="guest">Guest</MenuItem>
                   <MenuItem value="admin">Admin</MenuItem>
@@ -159,16 +163,10 @@ const SignupPage = () => {
                   name="password"
                   margin="normal"
                   placeholder="Enter your password..."
-                  type="password"
-                  value={signupData.password}
-                  onChange={(e) =>
-                    setSignupData({ ...signupData, password: e.target.value })
-                  }
+                  type={showPassword ? "text" : "password"}
                 />
 
-                {errors.password &&
-                touched.password &&
-                signupData.password === "" ? (
+                {errors.password && touched.password ? (
                   <div style={{ color: "red" }}>{errors.password}</div>
                 ) : null}
 
@@ -180,21 +178,30 @@ const SignupPage = () => {
                   variant="outlined"
                   margin="normal"
                   placeholder="Enter your password..."
-                  type="password"
-                  value={signupData.confirmPassword}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      confirmPassword: e.target.value,
-                    })
-                  }
+                  type={showPassword ? "text" : "password"}
                 />
 
-                {errors.confirmPassword &&
-                touched.confirmPassword &&
-                signupData.confirmPassword === "" ? (
+                {errors.confirmPassword && touched.confirmPassword ? (
                   <div style={{ color: "red" }}>{errors.confirmPassword}</div>
                 ) : null}
+
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  mt={1}
+                  mb={1}
+                >
+                  <IconButton
+                    onClick={handleTogglePassword}
+                    sx={{ color: "Highlight" }}
+                  >
+                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                  </IconButton>
+                  <Typography sx={{ pr: 1, color: "Highlight" }}>
+                    {showPassword ? "Hide" : "Show"} Password
+                  </Typography>
+                </Stack>
 
                 <Button
                   variant="contained"
