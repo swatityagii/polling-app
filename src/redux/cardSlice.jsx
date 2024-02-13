@@ -30,6 +30,7 @@ export const signupUser = createAsyncThunk(
   }
 );
 
+
 export const loginUser = createAsyncThunk(
   "loginUser",
   async (credentials, { dispatch }) => {
@@ -50,3 +51,4 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+

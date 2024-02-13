@@ -17,6 +17,8 @@ import {
   InputLabel,
   TextField,
   IconButton,
+  InputAdornment,
+  OutlinedInput,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 
@@ -42,6 +44,8 @@ function MyField(props) {
     />
   );
 }
+
+
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -164,8 +168,24 @@ const SignupPage = () => {
                   margin="normal"
                   placeholder="Enter your password..."
                   type={showPassword ? "text" : "password"}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton
+                          onClick={handleTogglePassword}
+                          sx={{ color: "Highlight" }}
+                        >
+                          {showPassword ? (
+                            <VisibilityIcon />
+                          ) : (
+                            <VisibilityOffIcon />
+                          )}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
                 />
-
+                
                 {errors.password && touched.password ? (
                   <div style={{ color: "red" }}>{errors.password}</div>
                 ) : null}
@@ -184,24 +204,6 @@ const SignupPage = () => {
                 {errors.confirmPassword && touched.confirmPassword ? (
                   <div style={{ color: "red" }}>{errors.confirmPassword}</div>
                 ) : null}
-
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  justifyContent="flex-start"
-                  mt={1}
-                  mb={1}
-                >
-                  <IconButton
-                    onClick={handleTogglePassword}
-                    sx={{ color: "Highlight" }}
-                  >
-                    {showPassword ? <VisibilityIcon /> : <VisibilityOffIcon />}
-                  </IconButton>
-                  <Typography sx={{ pr: 1, color: "Highlight" }}>
-                    {showPassword ? "Hide" : "Show"} Password
-                  </Typography>
-                </Stack>
 
                 <Button
                   variant="contained"

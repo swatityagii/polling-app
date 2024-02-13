@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import AddPoll from "./AddPoll";
-import ListPolls from "./Dashboard";
+import ListPolls from "./AdminDashboard";
 
 const App = () => {
   return (

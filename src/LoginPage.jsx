@@ -56,14 +56,14 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
     dispatch(loginUser(values));
   };
   const loginAuthenticated = useSelector(
     (state) => state.card.loginAuthenticated
   );
 
-  console.log(loginAuthenticated);
+  // console.log(loginAuthenticated);
 
   useEffect(() => {
     return () => {

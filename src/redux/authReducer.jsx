@@ -5,6 +5,7 @@ const initialState = {
   error: null,
   signupAuthenticated: false,
   loginAuthenticated: false,
+  polls : []
 };
 
 export const cardSlice = createSlice({
@@ -33,9 +34,12 @@ export const cardSlice = createSlice({
     LoginresetError(state) {
       state.loginAuthenticated = null;
     },
+    adminAllPoll: (state, action) => {
+      state.polls = action.payload;
+    }
   },
 });
 
-export const { signupSuccess, resetError, loginSuccess, LoginresetError } =
+export const { signupSuccess, resetError, loginSuccess, LoginresetError , adminAllPoll } =
   cardSlice.actions;
 export default cardSlice.reducer;
